@@ -1,15 +1,22 @@
 name: Rustup
 
 on:
+  push:
+   branches:
   pull_request:
 
 # Brand new concurrency setting! This ensures that not more than one run can be triggered for the same commit.
 # It is useful for pull requests coming from the main repository since both triggers will match.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.sha }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+  debug_actions:
+    name: debug_actions
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ github.workflow }}-${{ github.ref }}
   check:
     name: Check
     runs-on: ubuntu-latest
