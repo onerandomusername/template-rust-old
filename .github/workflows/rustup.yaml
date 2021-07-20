@@ -14,6 +14,7 @@ concurrency:
 jobs:
   debug_actions:
     name: debug_actions
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Dump GitHub context
@@ -103,7 +104,7 @@ jobs:
   artifact:
     name: Generate Artifact
     needs: [check,test,fmt,clippy]
-    if: always()
+    if: always() && !${{ cancelled() }}
     runs-on: ubuntu-latest
     steps:
       # Prepare the Pull Request Payload artifact. If this fails, we
