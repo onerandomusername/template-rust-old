@@ -2,6 +2,7 @@ name: Rustup
 
 on:
   push:
+   branches:
   pull_request:
 
 # Brand new concurrency setting! This ensures that not more than one run can be triggered for the same commit.
